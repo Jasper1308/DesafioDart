@@ -59,5 +59,61 @@ double paraKelvin(double temperatura){
   return temperatura + 273.15;
 }
 
+double calcularMediaUmidade(List<MedidaClimatica>? medidas){
+  if(medidas == null || medidas.isEmpty){
+    return 0.0;
+  } else {
+    double umidades = 0;
+    for (final medida in medidas) {
+      umidades = umidades + medida.umidade;
+    }
+    return umidades / medidas.length;
+  }
+}
 
+double calcularMaxUmidade(List<MedidaClimatica>? medidas){
+  if(medidas == null || medidas.isEmpty){
+    return 0.0;
+  } else {
+    double max = 0;
+    for(final medida in medidas){
+      if(medida.umidade > max){
+        max = medida.umidade;
+      }
+    }
+    return max;
+  }
+}
 
+double calcularMinUmidade(List<MedidaClimatica>? medidas){
+  if(medidas == null || medidas.isEmpty){
+    return 0.0;
+  } else {
+    double min = 1;
+    for(final medida in medidas){
+      if(medida.umidade < min){
+        min = medida.umidade;
+      }
+    }
+    return min;
+  }
+}
+
+int direcaoFrequenteVento(List<MedidaClimatica>? medidas){
+  if(medidas == null || medidas.isEmpty){
+    return 0;
+  } else {
+    Map<int, int> ventos = {};
+    for (final medida in medidas) {
+      int direcao = medida.direcaoVento;
+      ventos.update(direcao, (value) => value + 1, ifAbsent: () => 1);
+    }
+    int maiorFrequencia = 0;
+    ventos.forEach((direcao, frequencia) {
+      if (frequencia > maiorFrequencia) {
+        maiorFrequencia = direcao;
+      }
+    });
+    return maiorFrequencia;
+  }
+}
