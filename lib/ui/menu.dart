@@ -4,7 +4,7 @@ void exibirMenu(){
   print("Olá, Marcelo. Que relatório precisa?");
   print("1 - Temperatura");
   print("2 - Umidade");
-  print("2 - Direção do vento");
+  print("3 - Direção do vento");
   print("Digite o número da opção desejada: ");
 }
 

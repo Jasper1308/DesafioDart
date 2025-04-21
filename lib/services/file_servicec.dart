@@ -1,13 +1,17 @@
 import 'dart:io';
 import 'dart:convert';
-import 'package:desafioDart/class.dart';
+import 'package:desafioDart/models.dart';
 
 // Lê o conteúdo de cada arquivo com codificação Latin1 e adiciona à lista como String
 Future<List<String>> paraString(List<FileSystemEntity> arquivos) async{
   List<String> listaArquivos = [];
   for (final arquivo in arquivos) {
-    // Uso de API de gerenciamento de arquivos para ler e converter o conteúdo
-    listaArquivos.add(await File(arquivo.path).openRead().transform(latin1.decoder).join());
+    try {
+      // Uso de API de gerenciamento de arquivos para ler e converter o conteúdo
+      listaArquivos.add(await File(arquivo.path).openRead().transform(latin1.decoder).join());
+    } catch (e) {
+      throw Exception("Erro ao ler arquivo ${arquivo.path}");
+    }
   }
   return listaArquivos;
 }

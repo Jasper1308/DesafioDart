@@ -1,8 +1,8 @@
 import 'dart:io';
-import 'package:desafioDart/functions.dart';
-import 'package:desafioDart/class.dart';
-import 'package:desafioDart/conversoes.dart';
-import 'package:desafioDart/menu.dart';
+import 'package:desafioDart/services/file_servicec.dart';
+import 'package:desafioDart/models.dart';
+import 'package:desafioDart/ui/relatorio_view.dart';
+import 'package:desafioDart/ui/menu.dart';
 
 void main() async{
   // Lê todos os arquivos do diretório
@@ -11,6 +11,15 @@ void main() async{
   List<String> listaArquivos = await paraString(arquivos);
   // Lista para armazenar os dados como objetos MedidaClimatica
   Map<String, List<MedidaClimatica>> dados = await preencherMapa(listaArquivos, arquivos);
-  exibirMenu();
-  obterOpcao();
+  while(dados != 0){
+    exibirMenu();
+    int opcao = obterOpcao();
+    switch(opcao){
+      case 1: exibirRelatorioTemperatura(dados);
+      break;
+      case 2: exibirRelatorioUmidade(dados);
+      break;
+      case 3: exibirRelatorioVento(dados);
+    }
+  }
 }

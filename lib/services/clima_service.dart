@@ -1,18 +1,16 @@
-import 'package:desafioDart/class.dart';
+import 'package:desafioDart/models.dart';
 
 
 // Soma todos as temperaturas e divide pelo tamanho da lista
 double calcularMediaTemperatura(List<MedidaClimatica>? medidas){
   if(medidas == null || medidas.isEmpty){
-    return 0.0;
+    throw Exception("Lista Vazia");
   } else{
     double temperatura = 0;
-    int div = 0;
     for(final medida in medidas){
       temperatura = temperatura + medida.tempC;
-      div++;
     }
-    final media = temperatura / div;
+    final media = temperatura / medidas.length;
     return media;
   }
 }
@@ -22,14 +20,14 @@ double calcularMediaTemperatura(List<MedidaClimatica>? medidas){
 double calcularMaxTemperatura(List<MedidaClimatica>? medidas){
   double max = 0;
   if(medidas == null || medidas.isEmpty){
-    return 0.0;
+    throw Exception("Lista Vazia");
   } else{
     for(final medida in medidas){
       if(medida.tempC > max){
         max = medida.tempC;
       }
     }
-  return max;
+    return max;
   }
 }
 
@@ -38,7 +36,7 @@ double calcularMaxTemperatura(List<MedidaClimatica>? medidas){
 double calcularMinTemperatura(List<MedidaClimatica>? medidas){
   double min = 30;
   if(medidas == null || medidas.isEmpty){
-    return 0.0;
+    throw Exception("Lista Vazia");
   } else{
     for(final medida in medidas){
       if(medida.tempC < min){
@@ -49,19 +47,9 @@ double calcularMinTemperatura(List<MedidaClimatica>? medidas){
   }
 }
 
-
-// Funções de conversão de Temperatura
-double paraFahrenheit(double temperatura){
-  return (temperatura * 9/5)+32;
-}
-
-double paraKelvin(double temperatura){
-  return temperatura + 273.15;
-}
-
 double calcularMediaUmidade(List<MedidaClimatica>? medidas){
   if(medidas == null || medidas.isEmpty){
-    return 0.0;
+    throw Exception("Lista Vazia");
   } else {
     double umidades = 0;
     for (final medida in medidas) {
@@ -73,7 +61,7 @@ double calcularMediaUmidade(List<MedidaClimatica>? medidas){
 
 double calcularMaxUmidade(List<MedidaClimatica>? medidas){
   if(medidas == null || medidas.isEmpty){
-    return 0.0;
+    throw Exception("Lista Vazia");
   } else {
     double max = 0;
     for(final medida in medidas){
@@ -87,7 +75,7 @@ double calcularMaxUmidade(List<MedidaClimatica>? medidas){
 
 double calcularMinUmidade(List<MedidaClimatica>? medidas){
   if(medidas == null || medidas.isEmpty){
-    return 0.0;
+    throw Exception("Lista Vazia");
   } else {
     double min = 1;
     for(final medida in medidas){
@@ -101,7 +89,7 @@ double calcularMinUmidade(List<MedidaClimatica>? medidas){
 
 int direcaoFrequenteVento(List<MedidaClimatica>? medidas){
   if(medidas == null || medidas.isEmpty){
-    return 0;
+    throw Exception("Lista Vazia");
   } else {
     Map<int, int> ventos = {};
     for (final medida in medidas) {
@@ -115,5 +103,17 @@ int direcaoFrequenteVento(List<MedidaClimatica>? medidas){
       }
     });
     return maiorFrequencia;
+  }
+}
+
+double calcularMediaVento(List<MedidaClimatica>? medidas){
+  if(medidas == null || medidas.isEmpty){
+    throw Exception("Lista Vazia");
+  } else {
+    double velocidade = 0;
+    for (final medida in medidas) {
+      velocidade = velocidade + medida.velVento;
+    }
+    return velocidade / medidas.length;
   }
 }
